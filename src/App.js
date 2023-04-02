@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import { Box, ThemeProvider } from "@mui/material";
+import { darkTheme } from "./theme/Theme";
+
+import {
+  Feed,
+  SearchFeed,
+  VideoDetails,
+  ChannelDetails,
+  PlayListDetails,
+} from "./pages";
+import { Navbar } from "./components";
+import Home from "./pages/Home";
+
+const App = ({ children }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ backgroundColor: "#0f0f0f" }}>
+      <ThemeProvider theme={darkTheme}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" exact element={<Home />}>
+              <Route path="/" element={<Feed />} />
+              <Route path="search/:name" element={<SearchFeed />} />
+            </Route>
+            <Route path="channel/:name/:id" element={<ChannelDetails />} />
+            <Route path="video/:name/:id" element={<VideoDetails />} />
+            <Route path="playlist/:id" element={<PlayListDetails />} />
+          </Routes>
+          {children}
+        </BrowserRouter>
+      </ThemeProvider>
+    </Box>
   );
-}
+};
 
 export default App;

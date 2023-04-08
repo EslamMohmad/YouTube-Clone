@@ -5,6 +5,7 @@ export const DarkMoodTheme = {
     scoundryColor: "#161616",
     lightBlackColor: "#222222",
     whiteBlackColor: "#484848",
+    activePlaylistColor: "#3b83d257",
   },
   text: {
     link: "#338fd9",

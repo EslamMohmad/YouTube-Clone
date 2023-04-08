@@ -1,20 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Stack, Box, Typography } from "@mui/material";
-import { fetchFromAPI } from "../../utils/fetchFromAPI";
-import { useParams } from "react-router-dom";
 import SortComment from "./SortComment";
 import Comment from "./Comment";
+import { fetchVideoComments } from "../../Store/APIs";
+import { useDispatch, useSelector } from "react-redux";
+import useLocationDetails from "../../hooks/useLocationDetails";
 
 const VideoComments = ({ statistics }) => {
-  const [comment, setComment] = useState([]);
+  const {
+    VideoPage: {
+      videoComments,
+      prevVideoId,
+      playListVideos,
+      playlistDetails,
+      videoDetails,
+      prevPlaylistId,
+    },
+  } = useSelector(({ GlobalSlice }) => GlobalSlice);
 
-  const { id } = useParams();
+  const action = useDispatch();
+
+  const { hash, search } = useLocationDetails();
 
   useEffect(() => {
-    fetchFromAPI(
-      `commentThreads?part=snippet,replies,id&maxResults=30&videoId=${id}`
-    ).then(({ items }) => setComment(items));
-  }, [id]);
+    if (hash !== "playlist") {
+      if (search !== prevVideoId) {
+        action(fetchVideoComments(search));
+      }
+    } else {
+      if (playListVideos.length) {
+        if (playlistDetails?.id?.playlistId !== prevPlaylistId) {
+          action(
+            fetchVideoComments(playListVideos[0]?.snippet?.resourceId?.videoId)
+          );
+        }
+      }
+    }
+  }, [action, playlistDetails?.id?.playlistId]);
 
   return (
     <Box sx={{ py: 2 }}>
@@ -25,7 +47,7 @@ const VideoComments = ({ statistics }) => {
         <SortComment />
       </Stack>
       <Box>
-        {comment.map((item) => (
+        {videoComments.map((item) => (
           <Comment
             key={item.etag}
             comment={item?.snippet?.topLevelComment?.snippet}

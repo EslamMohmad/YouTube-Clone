@@ -13,6 +13,7 @@ import {
 } from "./pages";
 import { Navbar } from "./components";
 import Home from "./pages/Home";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = ({ children }) => {
   return (
@@ -21,13 +22,15 @@ const App = ({ children }) => {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" exact element={<Home />}>
-              <Route path="/" element={<Feed />} />
-              <Route path="search/:name" element={<SearchFeed />} />
+            <Route path="YouTube-Clone">
+              <Route path="" exact element={<Home />}>
+                <Route path="" element={<Feed />} />
+                <Route path="search/:name" element={<SearchFeed />} />
+              </Route>
+              <Route path="channel/:name/:id" element={<ChannelDetails />} />
+              <Route path="video/:name" element={<VideoDetails />} />
+              <Route path="error/:name" element={<PageNotFound />} />
             </Route>
-            <Route path="channel/:name/:id" element={<ChannelDetails />} />
-            <Route path="video/:name/:id" element={<VideoDetails />} />
-            <Route path="playlist/:id" element={<PlayListDetails />} />
           </Routes>
           {children}
         </BrowserRouter>

@@ -45,9 +45,9 @@ const SearchFeed = () => {
             {item?.id?.kind.includes("channel") && (
               <SearchedChannel key={item.etag} data={item} />
             )}
-            {/* {item?.id?.kind.includes("playlist") && (
+            {item?.id?.kind.includes("playlist") && (
               <SearchedPlaylist key={item.etag} data={item} />
-            )} */}
+            )}
           </Box>
         ))}
       </Stack>

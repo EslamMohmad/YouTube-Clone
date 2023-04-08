@@ -18,13 +18,21 @@ const Comment = ({ comment, replies, avatarDim }) => {
       <Avatar
         src={comment?.authorProfileImageUrl}
         sx={{ width: avatarDim, height: avatarDim, cursor: "pointer" }}
-        onClick={() => navTo(`/channel/${comment?.authorChannelId?.value}`)}
+        onClick={() =>
+          navTo(
+            `/YouTube-Clone/channel/${comment?.authorDisplayName}/${comment?.authorChannelId?.value}`
+          )
+        }
       />
       <Stack gap={0.2}>
         <Typography variant="body2">
           <span
             style={{ paddingRight: "5px", cursor: "pointer" }}
-            onClick={() => navTo(`/channel/${comment?.authorChannelId?.value}`)}
+            onClick={() =>
+              navTo(
+                `/YouTube-Clone/channel/${comment?.authorDisplayName}/${comment?.authorChannelId?.value}`
+              )
+            }
           >
             {comment?.authorDisplayName}
           </span>

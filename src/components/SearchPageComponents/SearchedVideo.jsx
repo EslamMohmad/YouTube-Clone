@@ -19,14 +19,14 @@ const SearchedVideo = ({ data: { snippet, id } }) => {
       <Box
         component="a"
         href={handlingLinkTextSpace(
-          `/video/${snippet?.channelTitle}/${id?.videoId}`
+          `/YouTube-Clone/video/${snippet?.channelTitle}?id=${id?.videoId}#video`
         )}
         sx={{
           borderRadius: "10px",
           overflow: "hidden",
           flexGrow: 1,
           maxWidth: { xs: "unset", md: "400px" },
-          height: { xs: "240px", sm: "300px", md: "auto" },
+          height: { xs: "200px", sm: "300px", md: "auto" },
           cursor: "pointer",
           width: { xs: "100%", md: "auto" },
         }}
@@ -42,12 +42,12 @@ const SearchedVideo = ({ data: { snippet, id } }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: { md: "40%" },
+          width: { md: "45%" },
         }}
       >
         <Link
           to={handlingLinkTextSpace(
-            `/video/${snippet?.channelTitle}/${id?.videoId}`
+            `/YouTube-Clone/video/${snippet?.channelTitle}?id=${id?.videoId}#video`
           )}
         >
           <Typography
@@ -67,7 +67,7 @@ const SearchedVideo = ({ data: { snippet, id } }) => {
         </Typography>
         <Link
           to={handlingLinkTextSpace(
-            `/channel/${snippet?.channelTitle}/${snippet?.channelId}`
+            `/YouTube-Clone/channel/${snippet?.channelTitle}/${snippet?.channelId}`
           )}
         >
           <Typography

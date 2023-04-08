@@ -39,7 +39,7 @@ const Menu = () => {
       </IconButton>
 
       <Box
-        onClick={() => navToFeedPage(`/`)}
+        onClick={() => navToFeedPage(`/YouTube-Clone`)}
         sx={{
           width: "90px",
           height: "45px",

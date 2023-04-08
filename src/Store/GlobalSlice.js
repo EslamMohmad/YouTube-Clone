@@ -6,6 +6,8 @@ import {
   fetchVideoDetails,
   fetchRelatedVideos,
   fetchTagVideos,
+  fetchPlaylistVideos,
+  fetchVideoComments,
 } from "./APIs";
 
 const GlobalSlice = createSlice({
@@ -26,8 +28,12 @@ const GlobalSlice = createSlice({
     },
     VideoPage: {
       relatedVideos: [],
+      playListVideos: [],
+      videoComments: [],
       videoDetails: {},
+      playlistDetails: {},
       prevVideoId: "",
+      prevPlaylistId: "",
     },
   },
   reducers: {
@@ -39,6 +45,9 @@ const GlobalSlice = createSlice({
     },
     setCurrentTag: (state, { payload }) => {
       state.FeedPage.currentTag = payload;
+    },
+    setPlaylistDetails: (state, { payload }) => {
+      state.VideoPage.playlistDetails = payload;
     },
   },
   extraReducers: {
@@ -112,10 +121,35 @@ const GlobalSlice = createSlice({
     [fetchRelatedVideos.rejected]: (state) => {
       state.fetchingDataState = "rejected";
     },
+    [fetchPlaylistVideos.pending]: (state) => {
+      state.fetchingDataState = "pending";
+    },
+    [fetchPlaylistVideos.fulfilled]: (state, { payload, meta }) => {
+      state.fetchingDataState = "fulfilled";
+      state.VideoPage.playListVideos = payload.items;
+      state.VideoPage.prevPlaylistId = meta.arg;
+    },
+    [fetchPlaylistVideos.rejected]: (state) => {
+      state.fetchingDataState = "rejected";
+    },
+    [fetchVideoComments.pending]: (state) => {
+      state.fetchingDataState = "pending";
+    },
+    [fetchVideoComments.fulfilled]: (state, { payload, meta }) => {
+      state.fetchingDataState = "fulfilled";
+      state.VideoPage.videoComments = payload.items;
+    },
+    [fetchVideoComments.rejected]: (state) => {
+      state.fetchingDataState = "rejected";
+    },
   },
 });
 
-export const { setselectedCategory, setCurrentRoute, setCurrentTag } =
-  GlobalSlice.actions;
+export const {
+  setselectedCategory,
+  setCurrentRoute,
+  setCurrentTag,
+  setPlaylistDetails,
+} = GlobalSlice.actions;
 
 export default GlobalSlice.reducer;

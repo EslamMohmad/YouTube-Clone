@@ -2,7 +2,6 @@ import React from "react";
 
 import { CardContent, Typography, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { CheckCircle } from "@mui/icons-material";
 
 import { countingUsers, contentPublishedTime } from "../../utils/constants";
 
@@ -27,7 +26,7 @@ const VideoTitle = ({
         minHeight: "100px",
       }}
     >
-      <Link to={`/video/${channelTitle}/${id}`}>
+      <Link to={`/YouTube-Clone/video/${channelTitle}?id=${id}#video`}>
         <Typography
           variant="body1"
           sx={{
@@ -42,7 +41,7 @@ const VideoTitle = ({
           {title}
         </Typography>
       </Link>
-      {pathname !== "/" && (
+      {pathname !== "/YouTube-Clone" && (
         <Typography
           variant="body2"
           sx={{
@@ -56,8 +55,8 @@ const VideoTitle = ({
         </Typography>
       )}
       <Box sx={{ a: { color: "gray" } }}>
-        {pathname === "/" && (
-          <Link to={`/channel/${channelTitle}/${channelId}`}>
+        {pathname === "/YouTube-Clone" && (
+          <Link to={`/YouTube-Clone/channel/${channelTitle}/${channelId}`}>
             <Typography
               variant="body2"
               sx={{
@@ -72,7 +71,7 @@ const VideoTitle = ({
         )}
         <Typography variant="body2" color="gray">
           {contentPublishedTime(publishedAt)} ago
-          {pathname === "/" && (
+          {pathname === "/YouTube-Clone" && (
             <>
               <span style={{ padding: "0 5px" }}>|</span>
               {countingUsers(viewCount)} views

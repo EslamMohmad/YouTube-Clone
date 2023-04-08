@@ -29,7 +29,7 @@ const ChannelTitle = () => {
   const handlingRouting = (e) =>
     !pathname.includes("channel")
       ? navToChannel(
-          `/channel/${channelDetails?.snippet?.title}/${videoDetails?.snippet?.channelId}`
+          `/YouTube-Clone/channel/${channelDetails?.snippet?.title}/${videoDetails?.snippet?.channelId}`
         )
       : e.preventDefault();
 

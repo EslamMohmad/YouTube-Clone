@@ -12,7 +12,9 @@ const SearchedChannel = ({ data: { snippet, id } }) => {
       <Box
         sx={{ width: { xs: "auto", md: "400px" } }}
         onClick={() =>
-          navTo(`/channel/${snippet?.channelTitle}/${id?.channelId}`)
+          navTo(
+            `/YouTube-Clone/channel/${snippet?.channelTitle}/${id?.channelId}`
+          )
         }
       >
         <CardMedia
@@ -27,12 +29,14 @@ const SearchedChannel = ({ data: { snippet, id } }) => {
           }}
         />
       </Box>
-      <Box sx={{ width: { md: "40%" } }}>
+      <Box sx={{ width: { md: "45%" } }}>
         <Typography
           variant="h6"
           sx={{ cursor: "pointer" }}
           onClick={() =>
-            navTo(`/channel/${snippet?.channelTitle}/${id?.channelId}`)
+            navTo(
+              `/YouTube-Clone/channel/${snippet?.channelTitle}/${id?.channelId}`
+            )
           }
         >
           {snippet?.title}

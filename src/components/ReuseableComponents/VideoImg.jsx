@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const VideoImg = ({ info: { id, url, channelTitle } }) => {
   return (
-    <Link to={`/video/${channelTitle}/${id}`}>
+    <Link to={`/YouTube-Clone/video/${channelTitle}?id=${id}#video`}>
       <CardMedia
         component="img"
         height="100%"

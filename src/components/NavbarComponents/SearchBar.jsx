@@ -9,7 +9,9 @@ const SearchBar = () => {
   const [focusState, setFocusState] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  const { prevSearchText } = useSelector(({ SearchSlice }) => SearchSlice);
+  const { prevSearchText, searchText } = useSelector(
+    ({ SearchSlice }) => SearchSlice
+  );
 
   const action = useDispatch();
 
@@ -42,7 +44,6 @@ const SearchBar = () => {
 
         <Paper
           component="input"
-          value={inputValue ? inputValue : prevSearchText}
           sx={{
             border: "none",
             width: { xs: "100%", md: "450px" },
@@ -59,7 +60,7 @@ const SearchBar = () => {
           placeholder="Search"
           onFocus={() => setFocusState(!focusState)}
           onBlur={() => setFocusState(!focusState)}
-          onChange={({ target }) => setInputValue(target.value)}
+          onInput={({ target }) => setInputValue(target.value)}
         />
       </Box>
       <IconButton
@@ -77,9 +78,10 @@ const SearchBar = () => {
           ":active": { backgroundColor: "action.active" },
         }}
         onClick={() => {
-          (inputValue || prevSearchText) &&
-            navTo(`search/${prevSearchText || inputValue}`);
-          action(inputTxt(prevSearchText || inputValue));
+          if (inputValue) {
+            navTo(`YouTube-Clone/search/${inputValue}`);
+            action(inputTxt(inputValue));
+          }
         }}
       >
         <Search />

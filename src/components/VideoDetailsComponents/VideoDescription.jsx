@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography, Box, useMediaQuery, useTheme } from "@mui/material";
 import ChannelTitle from "../ChannelDetailsComponents/ChannelTitle";
 import VideoComments from "./VideoComments";
 import VideoInfo from "./VideoInfo";
@@ -8,12 +8,21 @@ import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { videoButtonsOption } from "../../utils/constants";
 import LikesCounter from "../ReuseableComponents/LikesCounter";
+import PlaylistVideos from "./PlaylistVideos";
+import useLocationDetails from "../../hooks/useLocationDetails";
 
 const VideoDescription = ({
   videoDetails: { contentDetails, snippet, statistics },
 }) => {
+  const { hash } = useLocationDetails();
+
+  const theme = useTheme();
+
+  const media = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <Stack gap={2}>
+      {hash === "playlist" && media && <PlaylistVideos />}
       <Typography variant="h5" fontSize="1.4rem">
         {snippet?.title}
       </Typography>

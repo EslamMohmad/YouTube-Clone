@@ -1,17 +1,21 @@
 import React from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import VideoSuggested from "./VideoSuggested";
+import PlaylistVideos from "../VideoDetailsComponents/PlaylistVideos";
+import useLocationDetails from "../../hooks/useLocationDetails";
+import RelatedToVideo from "../VideoDetailsComponents/RelatedToVideo";
 
-const Suggestions = ({ data }) => {
+const Suggestions = () => {
+  const { hash } = useLocationDetails();
+
+  const theme = useTheme();
+
+  const media = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <Box sx={{ maxWidth: { md: "100%" } }}>
-      <Stack gap={2}>
-        {data.map((item, idx) => (
-          <Box key={idx}>
-            <VideoSuggested video={item} />
-          </Box>
-        ))}
-      </Stack>
+      {hash === "playlist" && media && <PlaylistVideos />}
+      <RelatedToVideo />
     </Box>
   );
 };

@@ -25,6 +25,11 @@ export const fetchRelatedVideos = ThunkAPIFetcher(
   `search?part=snippet&type=video&maxResults=40&relatedToVideoId=`
 );
 
+export const fetchPlaylistVideos = ThunkAPIFetcher(
+  "VideoPage/PlaylistVideos",
+  `playlistItems?part=snippet,id&maxResults=1000&playlistId=`
+);
+
 export const fetchTagVideos = ThunkAPIFetcher(
   "FeedPage/Videos",
   `search?part=snippet&maxResults=40&q=`
@@ -33,4 +38,9 @@ export const fetchTagVideos = ThunkAPIFetcher(
 export const fetchSearchResults = ThunkAPIFetcher(
   "SearchPage/Results",
   `search?part=snippet&maxResults=20&q=`
+);
+
+export const fetchVideoComments = ThunkAPIFetcher(
+  "VideoPage/Comments",
+  `commentThreads?part=snippet,replies,id&maxResults=30&videoId=`
 );

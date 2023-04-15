@@ -1,11 +1,25 @@
 import { Box, Button, Stack } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { sideBarItems } from "../../utils/items";
 const LiteSidebar = () => {
   const listItemsArr = [...sideBarItems.firstList, sideBarItems.scoundList[0]];
+  const { currentRoute } = useSelector(({ GlobalSlice }) => GlobalSlice);
 
   return (
-    <Stack>
+    <Stack
+      sx={{
+        position: { xs: "fixed", sm: "static" },
+        zIndex: "1",
+        flexDirection: { xs: "row ", sm: "column" },
+        justifyContent: "space-between",
+        alignItems: "center",
+        bottom: "0",
+        width: { xs: "calc(100% - 32px)", sm: "auto" },
+        p: { xs: "8px 16px", sm: 0 },
+        backgroundColor: "background.primaryColor",
+      }}
+    >
       {listItemsArr.map((item) => (
         <Button
           variant="text"
@@ -17,8 +31,11 @@ const LiteSidebar = () => {
             flexDirection: "column",
             py: 1,
             ":not(:last-of-type)": {
-              mb: 1.5,
+              mb: { xs: "0", sm: 1.5 },
             },
+            backgroundColor: `${
+              item.name === currentRoute ? "action.hover" : "transparnet"
+            }`,
             ":hover": { backgroundColor: "action.hover" },
           }}
         >

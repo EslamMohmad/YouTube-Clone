@@ -6,11 +6,15 @@ import { useSelector } from "react-redux";
 const SlideSidebar = ({ state: { categoryMeunState, sidebarMediaQuery } }) => {
   const { currentRoute } = useSelector(({ GlobalSlice }) => GlobalSlice);
   return (
-    <Slide direction="right" in={categoryMeunState}>
+    <Slide
+      direction="right"
+      in={categoryMeunState}
+      onClick={(e) => e.stopPropagation()}
+    >
       <Box
         sx={{
           position: "relative",
-          zIndex: 3,
+          zIndex: 4,
           transform: `${
             !categoryMeunState
               ? "translateX(-285px) !important"

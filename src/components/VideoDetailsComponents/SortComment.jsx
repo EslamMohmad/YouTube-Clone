@@ -26,8 +26,9 @@ const SortComment = () => {
             borderRadius: "5px",
             overflow: "hidden",
             position: "absolute",
-            right: "-140px",
+            right: { xs: "-20vw", sm: "-140px" },
             top: "0",
+            width: "115px",
           }}
         >
           {sortOption.map((opt) => (

@@ -15,7 +15,7 @@ const FeedTags = () => {
       sx={{
         height: "40px",
         pb: 1,
-        m: "0 0 10px 16px",
+        m: "0 16px 10px 16px",
         overflow: "auto",
         "::-webkit-scrollbar-thumb": {
           backgroundColor: "transparent",

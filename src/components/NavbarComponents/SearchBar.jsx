@@ -4,6 +4,7 @@ import { Search } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { inputTxt } from "../../Store/SearchSlice";
 import { useNavigate } from "react-router-dom";
+import useFocus from "../../hooks/useFocus";
 
 const SearchBar = () => {
   const [focusState, setFocusState] = useState(false);
@@ -12,6 +13,8 @@ const SearchBar = () => {
   const { prevSearchText, searchText } = useSelector(
     ({ SearchSlice }) => SearchSlice
   );
+
+  const input = useFocus(focusState);
 
   const action = useDispatch();
 
@@ -44,6 +47,7 @@ const SearchBar = () => {
 
         <Paper
           component="input"
+          ref={input}
           sx={{
             border: "none",
             width: { xs: "100%", md: "450px" },

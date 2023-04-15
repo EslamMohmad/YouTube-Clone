@@ -7,6 +7,7 @@ import SearchedVideo from "../components/SearchPageComponents/SearchedVideo";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSearchResults } from "../Store/APIs";
 import { useParams } from "react-router-dom";
+import { toggleSearchBarState } from "../Store/ModalSlice";
 const SearchFeed = () => {
   const { searchText, searchResults, prevSearchText } = useSelector(
     ({ SearchSlice }) => SearchSlice
@@ -19,6 +20,7 @@ const SearchFeed = () => {
     if ((name || searchText) && (name || searchText) !== prevSearchText) {
       action(fetchSearchResults(name || searchText));
     }
+    action(toggleSearchBarState(false));
   }, [action, searchText]);
 
   return (

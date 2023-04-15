@@ -59,6 +59,9 @@ const ChannelTitle = () => {
             variant={handleTxtSize()}
             sx={{
               cursor: `${pathname.includes("channel") ? "unset" : "pointer"}`,
+              "@media (max-width:430px)": {
+                fontSize: "12px",
+              },
             }}
             onClick={(e) => handlingRouting(e)}
           >

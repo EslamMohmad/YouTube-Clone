@@ -23,7 +23,15 @@ const VideoDescription = ({
   return (
     <Stack gap={2}>
       {hash === "playlist" && media && <PlaylistVideos />}
-      <Typography variant="h5" fontSize="1.4rem">
+      <Typography
+        variant="h5"
+        fontSize="1.4rem"
+        sx={{
+          "@media (max-width:430px)": {
+            fontSize: "18px",
+          },
+        }}
+      >
         {snippet?.title}
       </Typography>
       <Stack

@@ -9,7 +9,7 @@ const ModalSidebar = ({ state }) => {
         position: "fixed",
         left: `${state.categoryMeunState ? "0" : "-270px"}`,
         top: "75px",
-        zIndex: 1,
+        zIndex: 4,
         transition: "0.5s ease left",
       }}
     >

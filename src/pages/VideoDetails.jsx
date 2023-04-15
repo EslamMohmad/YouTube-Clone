@@ -46,7 +46,7 @@ const VideoDetails = () => {
 
     //to reset state
     if (overlayState && categoryMeunState) {
-      action(toggleCategoryMeun({ category: false, overlay: false }));
+      // action(toggleCategoryMeun({ category: false, overlay: false }));
       action(setCurrentRoute("video"));
     }
   }, [action, search, hash]);
@@ -70,7 +70,8 @@ const VideoDetails = () => {
       sx={{
         color: "white",
         px: { xs: 3, lg: 5 },
-        py: 4,
+        pb: 4,
+        pt: { xs: 0, lg: 4 },
       }}
     >
       <Box sx={{ flexGrow: { md: 1 } }}>

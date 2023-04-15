@@ -2,6 +2,7 @@ import { VideoCard, ChannelCard, PlayListCard } from "..";
 import { Grid, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import LoadingComponent from "../../utils/LoadingComponent";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 const Videos = ({ filter, location, data }) => {
   const { fetchingDataState } = useSelector(({ GlobalSlice }) => GlobalSlice);
@@ -41,6 +42,8 @@ const Videos = ({ filter, location, data }) => {
     ));
   };
 
+  useScrollToTop();
+
   return (
     <Box
       sx={
@@ -48,7 +51,8 @@ const Videos = ({ filter, location, data }) => {
           ? {
               height: "calc(100vh - (75px + 58px))",
               overflowY: "auto",
-              px: 2,
+              p: { xs: 0, sm: "0 10px 0 16px" },
+              mr: { xs: "-8px", sm: 0 },
               "::-webkit-scrollbar-thumb": {
                 backgroundColor: "background.whiteBlackColor",
               },

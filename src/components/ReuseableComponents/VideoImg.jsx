@@ -10,7 +10,7 @@ const VideoImg = ({ info: { id, url, channelTitle } }) => {
         height="100%"
         image={url}
         alt={`image/${id}`}
-        sx={{ borderRadius: "20px", maxHeight: "200px" }}
+        sx={{ borderRadius: { xs: 0, sm: "20px" }, maxHeight: "230px" }}
       />
     </Link>
   );

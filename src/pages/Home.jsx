@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <Stack
       flexDirection="row"
-      sx={{ height: "calc(100vh - (75px))", overflow: "hidden", pr: 2 }}
+      sx={{ height: "calc(100vh - (75px))", overflow: "hidden" }}
     >
       <FeedSidebar />
       <Box

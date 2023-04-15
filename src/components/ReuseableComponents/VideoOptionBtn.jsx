@@ -14,6 +14,9 @@ const VideoOptionBtn = ({ children, parent }) => {
         cursor: `${parent === "videoOption" ? "auto" : "pointer"}`,
         userSelect: "none",
         height: "44px",
+        "@media (max-width:430px)": {
+          height: "35px",
+        },
         ":hover": {
           backgroundColor: `${
             parent === "videoOption"
@@ -27,6 +30,11 @@ const VideoOptionBtn = ({ children, parent }) => {
               ? "background.lightBlackColor"
               : "action.active"
           }`,
+        },
+        svg: {
+          "@media (max-width:430px)": {
+            fontSize: "16px",
+          },
         },
       }}
     >

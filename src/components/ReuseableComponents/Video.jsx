@@ -8,8 +8,9 @@ const Video = ({ src }) => {
         iframe: {
           height: { xs: "60vw", sm: "50vw", lg: "35vw" },
           width: "100%",
-          mb: 1,
         },
+        mx: { xs: "-24px", lg: 0 },
+        mb: 1,
       }}
       dangerouslySetInnerHTML={{
         __html: src,

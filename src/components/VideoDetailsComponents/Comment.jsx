@@ -52,7 +52,7 @@ const Comment = ({ comment, replies, avatarDim }) => {
             __html: comment?.textDisplay,
           }}
         ></Typography>
-        <Stack flexDirection="row" gap={2} alignItems="center" sx={{ py: 1 }}>
+        <Stack flexDirection="row" gap={2} alignItems="center" sx={{ pt: 1 }}>
           <LikesCounter
             likes={+comment?.likeCount}
             parentComponent={"comment"}

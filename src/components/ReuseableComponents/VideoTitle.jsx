@@ -4,6 +4,7 @@ import { CardContent, Typography, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 
 import { countingUsers, contentPublishedTime } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
 const VideoTitle = ({
   info: {
@@ -17,6 +18,9 @@ const VideoTitle = ({
   },
 }) => {
   const { pathname } = useLocation();
+  const {
+    FeedPage: { currentTag },
+  } = useSelector(({ GlobalSlice }) => GlobalSlice);
 
   return (
     <CardContent
@@ -71,7 +75,7 @@ const VideoTitle = ({
         )}
         <Typography variant="body2" color="gray">
           {contentPublishedTime(publishedAt)} ago
-          {pathname === "/YouTube-Clone" && (
+          {pathname === "/YouTube-Clone" && currentTag === "most popular" && (
             <>
               <span style={{ padding: "0 5px" }}>|</span>
               {countingUsers(viewCount)} views

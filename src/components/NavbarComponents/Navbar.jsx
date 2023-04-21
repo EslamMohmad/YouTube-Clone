@@ -1,5 +1,4 @@
 import { Stack, Box, useMediaQuery } from "@mui/material";
-
 import SearchBar from "./SearchBar";
 import Menu from "./Menu";
 import Account from "./Account";
@@ -7,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchBarMobileView from "./SearchBarMobileView";
 import { toggleSearchBarState } from "../../Store/ModalSlice";
 import { useTheme } from "@emotion/react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const Navbar = () => {
   const { searchBarState } = useSelector(({ ModalSlice }) => ModalSlice);

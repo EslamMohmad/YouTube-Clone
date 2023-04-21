@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, useTheme, useMediaQuery, Fade } from "@mui/material";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCategoryMeun } from "../../Store/ModalSlice";
+import {
+  toggleCategoryMeun,
+  toggleVideoMoreComments,
+  toggleVideoMoreInfo,
+} from "../../Store/ModalSlice";
 import { useLocation } from "react-router-dom";
 import ModalSidebar from "./ModalSidebar";
+import ModalMoreVideoInfo from "./ModalMoreVideoInfo";
+import SlideFromBottom from "../ReuseableComponents/SlideFromBottom";
 
-export const Overlay = ({ overlayState, sidebarMediaQuery }) => {
+import ModalMoreVideoComments from "./ModalMoreVideoComments";
+
+export const Overlay = ({ overlayState }) => {
   const action = useDispatch();
 
   return (
-    <Fade in={overlayState && sidebarMediaQuery} mountOnEnter unmountOnExit>
+    <Fade in={overlayState} mountOnEnter unmountOnExit>
       <Box
         sx={{
           width: "100%",
@@ -32,24 +40,59 @@ export const Overlay = ({ overlayState, sidebarMediaQuery }) => {
 
 const Modal = () => {
   const {
-    ModalSlice: { overlayState, categoryMeunState },
-    GlobalSlice: { currentRoute },
+    ModalSlice: {
+      overlayState,
+      categoryMeunState,
+      videoMoreInfo,
+      videoMoreComments,
+      screenScrollableState,
+    },
+    GlobalSlice: {
+      VideoPage: { videoDetails, videoComments },
+    },
   } = useSelector((state) => state);
 
   const theme = useTheme();
 
   const sidebarMediaQuery = useMediaQuery(theme.breakpoints.down("lg"));
 
+  const mobileViewMoreInfo = useMediaQuery(theme.breakpoints.down("sm"));
+
   const { pathname } = useLocation();
+
+  const action = useDispatch();
+
+  useEffect(() => {
+    document.body.style.overflow = `${
+      screenScrollableState ? "visible" : "hidden"
+    }`;
+    document.body.style.height = `${screenScrollableState ? "auto" : "100vh"}`;
+  }, [screenScrollableState]);
+
+  useEffect(() => {
+    !mobileViewMoreInfo &&
+      !screenScrollableState &&
+      action(toggleVideoMoreInfo(false));
+  }, [mobileViewMoreInfo]);
 
   return createPortal(
     <>
-      <Overlay
-        overlayState={overlayState}
-        sidebarMediaQuery={sidebarMediaQuery}
-      />
-      {pathname !== "/YouTube-Clone" && (
+      <Overlay overlayState={overlayState} />
+      {(pathname.includes("channel") || pathname.includes("video")) && (
         <ModalSidebar state={{ categoryMeunState, sidebarMediaQuery }} />
+      )}
+      {pathname.includes("video") && mobileViewMoreInfo && (
+        <SlideFromBottom state={videoMoreInfo} callback={toggleVideoMoreInfo}>
+          <ModalMoreVideoInfo videoDetails={videoDetails} />
+        </SlideFromBottom>
+      )}
+      {pathname.includes("video") && mobileViewMoreInfo && (
+        <SlideFromBottom
+          state={videoMoreComments}
+          callback={toggleVideoMoreComments}
+        >
+          <ModalMoreVideoComments comments={videoComments} />
+        </SlideFromBottom>
       )}
     </>,
     document.getElementById("modal")

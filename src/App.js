@@ -14,7 +14,6 @@ import {
 import { Navbar } from "./components";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
-import { useSelector } from "react-redux";
 
 const App = ({ children }) => {
   return (

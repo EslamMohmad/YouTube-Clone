@@ -6,10 +6,17 @@ import VideoInfo from "./VideoInfo";
 import VideoOptionBtn from "../ReuseableComponents/VideoOptionBtn";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { videoButtonsOption } from "../../utils/constants";
+import {
+  contentPublishedTime,
+  countingUsers,
+  videoButtonsOption,
+} from "../../utils/constants";
 import LikesCounter from "../ReuseableComponents/LikesCounter";
 import PlaylistVideos from "./PlaylistVideos";
 import useLocationDetails from "../../hooks/useLocationDetails";
+import { toggleVideoMoreInfo } from "../../Store/ModalSlice";
+import { useDispatch } from "react-redux";
+import VideoStatistics from "./VideoStatistics";
 
 const VideoDescription = ({
   videoDetails: { contentDetails, snippet, statistics },
@@ -19,6 +26,10 @@ const VideoDescription = ({
   const theme = useTheme();
 
   const media = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const mobileView = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const action = useDispatch();
 
   return (
     <Stack gap={2}>
@@ -34,6 +45,18 @@ const VideoDescription = ({
       >
         {snippet?.title}
       </Typography>
+      {mobileView && (
+        <VideoStatistics>
+          <Typography
+            variant="caption"
+            color="white"
+            sx={{ cursor: "pointer" }}
+            onClick={() => action(toggleVideoMoreInfo(true))}
+          >
+            ...more
+          </Typography>
+        </VideoStatistics>
+      )}
       <Stack
         flexDirection="row"
         justifyContent="space-between"
@@ -72,8 +95,10 @@ const VideoDescription = ({
             width: "auto !important",
             "@media (max-width : 737px)": {
               width: "100%",
-              pb: "15px",
               overflowX: "auto",
+              "::-webkit-scrollbar-thumb": {
+                backgroundColor: "transparent",
+              },
             },
           }}
         >
@@ -105,7 +130,7 @@ const VideoDescription = ({
           </Stack>
         </Box>
       </Stack>
-      <VideoInfo details={snippet} statistics={statistics} />
+      {!mobileView && <VideoInfo details={snippet} statistics={statistics} />}
       <VideoComments statistics={statistics} />
     </Stack>
   );

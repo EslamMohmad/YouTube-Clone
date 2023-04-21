@@ -62,25 +62,3 @@ a {
   border-radius: 20px !important;
   transition: all 0.3s ease;
 }
-
-@media screen and (max-width: 900px) {
-  .category-btn {
-    margin: 10px;
-  }
-  .copyright {
-    display: none !important;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .scroll-horizontal {
-    overflow: auto !important;
-  }
-
-  .react-player {
-    height: 45vh !important;
-  }
-  .search-bar {
-    width: 200px;
-  }
-}

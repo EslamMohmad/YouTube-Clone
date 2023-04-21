@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useState } from "react";
 import { Paper, IconButton, Stack, Box } from "@mui/material";
 import { Search } from "@mui/icons-material";
@@ -94,4 +95,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

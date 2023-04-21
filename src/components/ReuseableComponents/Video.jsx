@@ -11,6 +11,9 @@ const Video = ({ src }) => {
         },
         mx: { xs: "-24px", lg: 0 },
         mb: 1,
+        position: { xs: "sticky", sm: "static" },
+        top: "75px",
+        zIndex: 1,
       }}
       dangerouslySetInnerHTML={{
         __html: src,

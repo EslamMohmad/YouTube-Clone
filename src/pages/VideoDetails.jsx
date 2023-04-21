@@ -45,10 +45,10 @@ const VideoDetails = () => {
     }
 
     //to reset state
-    if (overlayState && categoryMeunState) {
-      // action(toggleCategoryMeun({ category: false, overlay: false }));
-      action(setCurrentRoute("video"));
+    if (overlayState || categoryMeunState) {
+      action(toggleCategoryMeun({ category: false, overlay: false }));
     }
+    action(setCurrentRoute("video"));
   }, [action, search, hash]);
 
   // useEffect(() => {

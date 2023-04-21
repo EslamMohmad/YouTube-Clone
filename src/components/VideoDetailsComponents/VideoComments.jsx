@@ -5,6 +5,9 @@ import Comment from "./Comment";
 import { fetchVideoComments } from "../../Store/APIs";
 import { useDispatch, useSelector } from "react-redux";
 import useLocationDetails from "../../hooks/useLocationDetails";
+import useCurrentMedia from "../../hooks/useCurrentMedia";
+import SpcialComment from "./SpicalComment";
+import Comments from "./Comments";
 
 const VideoComments = ({ statistics }) => {
   const {
@@ -22,6 +25,8 @@ const VideoComments = ({ statistics }) => {
 
   const { hash, search } = useLocationDetails();
 
+  const moreThanMobile = useCurrentMedia({ area: "up", size: "sm" });
+
   useEffect(() => {
     if (hash !== "playlist") {
       if (search !== prevVideoId) {
@@ -38,7 +43,7 @@ const VideoComments = ({ statistics }) => {
     }
   }, [action, playlistDetails?.id?.playlistId]);
 
-  return (
+  return moreThanMobile ? (
     <Box sx={{ py: 2 }}>
       <Stack flexDirection="row" gap={3} alignItems="center">
         <Typography variant="h6" sx={{ py: 2 }}>
@@ -46,17 +51,10 @@ const VideoComments = ({ statistics }) => {
         </Typography>
         <SortComment />
       </Stack>
-      <Box>
-        {videoComments.map((item) => (
-          <Comment
-            key={item.etag}
-            comment={item?.snippet?.topLevelComment?.snippet}
-            replies={item?.replies}
-            avatarDim={"40px"}
-          />
-        ))}
-      </Box>
+      <Comments comments={videoComments} />
     </Box>
+  ) : (
+    <SpcialComment comment={videoComments} />
   );
 };
 

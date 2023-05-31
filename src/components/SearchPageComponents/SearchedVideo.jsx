@@ -17,10 +17,6 @@ const SearchedVideo = ({ data: { snippet, id } }) => {
       }}
     >
       <Box
-        component="a"
-        href={handlingLinkTextSpace(
-          `/YouTube-Clone/video/${snippet?.channelTitle}?id=${id?.videoId}#video`
-        )}
         sx={{
           borderRadius: "10px",
           overflow: "hidden",
@@ -31,12 +27,18 @@ const SearchedVideo = ({ data: { snippet, id } }) => {
           width: { xs: "100%", md: "auto" },
         }}
       >
-        <CardMedia
-          src={snippet?.thumbnails?.high?.url}
-          component="img"
-          width="100%"
-          height="100%"
-        />
+        <Link
+          to={handlingLinkTextSpace(
+            `/YouTube-Clone/video/${snippet?.channelTitle}?id=${id?.videoId}#video`
+          )}
+        >
+          <CardMedia
+            src={snippet?.thumbnails?.high?.url}
+            component="img"
+            width="100%"
+            height="100%"
+          />
+        </Link>
       </Box>
       <Box
         sx={{

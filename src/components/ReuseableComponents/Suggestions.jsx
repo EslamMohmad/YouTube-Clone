@@ -1,16 +1,18 @@
 import React from "react";
-import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
-import VideoSuggested from "./VideoSuggested";
+import { Box } from "@mui/material";
 import PlaylistVideos from "../VideoDetailsComponents/PlaylistVideos";
 import useLocationDetails from "../../hooks/useLocationDetails";
 import RelatedToVideo from "../VideoDetailsComponents/RelatedToVideo";
+import useCurrentMedia from "../../hooks/useCurrentMedia";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
+import { useRef } from "react";
 
 const Suggestions = () => {
-  const { hash } = useLocationDetails();
+  const { hash, search } = useLocationDetails();
 
-  const theme = useTheme();
+  const media = useCurrentMedia({ area: "up", size: "lg" });
 
-  const media = useMediaQuery(theme.breakpoints.up("lg"));
+  useScrollToTop({ current: document.body.parentElement }, search);
 
   return (
     <Box sx={{ maxWidth: { md: "100%" } }}>

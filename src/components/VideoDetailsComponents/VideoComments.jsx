@@ -11,15 +11,13 @@ import Comments from "./Comments";
 
 const VideoComments = ({ statistics }) => {
   const {
-    VideoPage: {
-      videoComments,
-      prevVideoId,
-      playListVideos,
-      playlistDetails,
-      videoDetails,
-      prevPlaylistId,
-    },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+    videoComments,
+    prevVideoId,
+    playListVideos,
+    playlistDetails,
+    videoDetails,
+    prevPlaylistId,
+  } = useSelector(({ VideoSlice }) => VideoSlice);
 
   const action = useDispatch();
 

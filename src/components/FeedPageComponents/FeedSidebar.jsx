@@ -1,6 +1,7 @@
-import { Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useCurrentMedia from "../../hooks/useCurrentMedia";
 import { toggleCategoryMeun } from "../../Store/ModalSlice";
 import LiteSidebar from "./LiteSidebar";
 import NormalSidebar from "./NormalSidebar";
@@ -9,9 +10,7 @@ import SlideSidebar from "./SlideSidebar";
 const FeedSidebar = () => {
   const { categoryMeunState } = useSelector(({ ModalSlice }) => ModalSlice);
 
-  const theme = useTheme();
-
-  const sidebarMediaQuery = useMediaQuery(theme.breakpoints.down("lg"));
+  const sidebarMediaQuery = useCurrentMedia({ area: "down", size: "lg" });
 
   const action = useDispatch();
 

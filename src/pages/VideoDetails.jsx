@@ -17,16 +17,15 @@ import useLocationDetails from "../hooks/useLocationDetails";
 
 const VideoDetails = () => {
   const {
-    GlobalSlice: {
-      VideoPage: {
-        videoDetails,
-        relatedVideos,
-        prevVideoId,
-        prevPlaylistId,
-        playListVideos,
-        playlistDetails,
-      },
+    VideoSlice: {
+      videoDetails,
+      relatedVideos,
+      prevVideoId,
+      prevPlaylistId,
+      playListVideos,
+      playlistDetails,
     },
+
     ModalSlice: { overlayState, categoryMeunState },
   } = useSelector((state) => state);
   const { hash, search } = useLocationDetails();

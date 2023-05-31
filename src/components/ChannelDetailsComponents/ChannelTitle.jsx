@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 
 import { Stack, Box, Typography, Avatar } from "@mui/material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { countingUsers } from "../../utils/constants";
+import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
+import { countingUsers, handlingLinkTextSpace } from "../../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchChannelDetails } from "../../Store/APIs";
 const ChannelTitle = () => {
   const {
-    ChannelPage: { channelDetails },
-    VideoPage: { videoDetails },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+    ChannelSlice: { channelDetails },
+    VideoSlice: { videoDetails },
+  } = useSelector((state) => state);
 
   const action = useDispatch();
 
@@ -46,14 +46,27 @@ const ChannelTitle = () => {
     <Box
       sx={{
         backgroundColor: "background.primaryColor",
+        display: "flex",
       }}
     >
-      <Stack flexDirection={"row"}>
+      {pathname ? (
+        <Link
+          to={handlingLinkTextSpace(
+            `/YouTube-Clone/channel/${channelDetails?.snippet?.title}/${videoDetails?.snippet?.channelId}`
+          )}
+        >
+          <Avatar
+            src={channelDetails?.snippet?.thumbnails?.medium?.url}
+            sx={handleImgStyle()}
+          />
+        </Link>
+      ) : (
         <Avatar
           src={channelDetails?.snippet?.thumbnails?.medium?.url}
-          onClick={(e) => handlingRouting(e)}
           sx={handleImgStyle()}
         />
+      )}
+      <Stack flexDirection={"row"}>
         <Box sx={{ color: "white", ml: 2 }}>
           <Typography
             variant={handleTxtSize()}

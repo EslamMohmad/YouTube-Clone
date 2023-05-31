@@ -1,10 +1,15 @@
 import React from "react";
 import { CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
+import { handlingLinkTextSpace } from "../../utils/constants";
 
 const VideoImg = ({ info: { id, url, channelTitle } }) => {
   return (
-    <Link to={`/YouTube-Clone/video/${channelTitle}?id=${id}#video`}>
+    <Link
+      to={handlingLinkTextSpace(
+        `/YouTube-Clone/video/${channelTitle}?id=${id}#video`
+      )}
+    >
       <CardMedia
         component="img"
         height="100%"

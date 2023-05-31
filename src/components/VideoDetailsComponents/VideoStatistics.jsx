@@ -6,10 +6,8 @@ import { contentPublishedTime, countingUsers } from "../../utils/constants";
 
 const VideoStatistics = ({ children }) => {
   const {
-    VideoPage: {
-      videoDetails: { snippet, statistics },
-    },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+    videoDetails: { snippet, statistics },
+  } = useSelector(({ VideoSlice }) => VideoSlice);
 
   const mobileView = useCurrentMedia({ area: "down", size: "sm" });
 

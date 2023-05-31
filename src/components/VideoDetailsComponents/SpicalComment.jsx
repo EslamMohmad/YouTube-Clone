@@ -24,6 +24,7 @@ const SpcialComment = ({ comment }) => {
           top: "50%",
           right: "16px",
           transform: "translateY(-50%)",
+          backgroundColor: "#d7d7d7e6",
         }}
       >
         <KeyboardArrowDownIcon />

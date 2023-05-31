@@ -2,9 +2,7 @@ import React from "react";
 import { Box, CardMedia } from "@mui/material";
 import { useSelector } from "react-redux";
 const Banner = () => {
-  const {
-    ChannelPage: { channelDetails },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+  const { channelDetails } = useSelector(({ ChannelSlice }) => ChannelSlice);
 
   const bannerWidth = "1720";
 

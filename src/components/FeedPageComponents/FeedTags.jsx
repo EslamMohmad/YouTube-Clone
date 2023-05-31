@@ -1,12 +1,10 @@
 import { Stack, Button, Box } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTag } from "../../Store/GlobalSlice";
-import { feedTags } from "../../utils/items";
+import { setCurrentTag } from "../../Store/FeedSlice";
+import { feedTags } from "../../utils/constants";
 const FeedTags = () => {
-  const {
-    FeedPage: { currentTag },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+  const { currentTag } = useSelector(({ FeedSlice }) => FeedSlice);
 
   const action = useDispatch();
 

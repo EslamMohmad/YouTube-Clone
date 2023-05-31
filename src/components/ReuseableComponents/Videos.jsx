@@ -1,24 +1,28 @@
 import { VideoCard, ChannelCard, PlayListCard } from "..";
 import { Grid, Box } from "@mui/material";
 import { useSelector } from "react-redux";
-import LoadingComponent from "../../utils/LoadingComponent";
+import LoadingComponent from "./LoadingComponent";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
+import { useRef } from "react";
+import Prev_Next_Results from "./Prev_Next_Results";
 
-const Videos = ({ filter, location, data }) => {
-  const { fetchingDataState } = useSelector(({ GlobalSlice }) => GlobalSlice);
+const Videos = ({ filter, location, data, fetchingState }) => {
+  const { currentTag } = useSelector(({ FeedSlice }) => FeedSlice);
 
   const detectingContent = () => {
     const filterdContent = () => {
       const result = [];
-      filter.map((prop) => {
+      filter.map((prop) =>
         result.push(
           ...data.filter(
             (item) => (item?.id?.kind || item?.kind) === `youtube#${prop}`
           )
-        );
-      });
+        )
+      );
       return result;
     };
+
+    console.log(fetchingState);
 
     return filterdContent().map((item, idx) => (
       <Grid
@@ -42,14 +46,20 @@ const Videos = ({ filter, location, data }) => {
     ));
   };
 
-  useScrollToTop();
+  const scrollableElement = useRef();
+
+  useScrollToTop(scrollableElement, currentTag);
 
   return (
     <Box
+      ref={scrollableElement}
       sx={
         location === "home"
           ? {
-              height: "calc(100vh - (75px + 58px))",
+              height: {
+                xs: "calc(100vh - (75px + 58px + 77px))",
+                sm: "calc(100vh - (75px + 58px))",
+              },
               overflowY: "auto",
               p: { xs: 0, sm: "0 10px 0 16px" },
               mr: { xs: "-8px", sm: 0 },
@@ -66,12 +76,13 @@ const Videos = ({ filter, location, data }) => {
       }
     >
       <Grid container spacing={{ sm: 3 }} mb={2}>
-        {fetchingDataState !== "pending"
+        {fetchingState !== "pending"
           ? detectingContent()
-          : Array(10)
+          : Array(15)
               .fill()
               .map((e, idx) => <LoadingComponent key={idx} />)}
       </Grid>
+      <Prev_Next_Results />
     </Box>
   );
 };

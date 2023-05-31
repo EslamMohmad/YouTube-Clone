@@ -1,7 +1,7 @@
 import { Box, Button, Stack } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import { sideBarItems } from "../../utils/items";
+import { sideBarItems } from "../../utils/constants";
 const LiteSidebar = () => {
   const listItemsArr = [...sideBarItems.firstList, sideBarItems.scoundList[0]];
   const { currentRoute } = useSelector(({ GlobalSlice }) => GlobalSlice);

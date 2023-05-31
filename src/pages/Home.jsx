@@ -1,17 +1,8 @@
-import { useEffect } from "react";
 import { Stack, Box } from "@mui/material";
 import { FeedSidebar } from "../components";
 import { Outlet } from "react-router-dom";
-import { setCurrentRoute } from "../Store/GlobalSlice";
-import { useDispatch } from "react-redux";
 
 const Home = () => {
-  const action = useDispatch();
-
-  useEffect(() => {
-    action(setCurrentRoute("home"));
-  }, [action]);
-
   return (
     <Stack
       flexDirection="row"

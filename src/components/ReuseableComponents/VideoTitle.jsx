@@ -3,7 +3,11 @@ import React from "react";
 import { CardContent, Typography, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 
-import { countingUsers, contentPublishedTime } from "../../utils/constants";
+import {
+  countingUsers,
+  contentPublishedTime,
+  handlingLinkTextSpace,
+} from "../../utils/constants";
 import { useSelector } from "react-redux";
 
 const VideoTitle = ({
@@ -19,8 +23,8 @@ const VideoTitle = ({
 }) => {
   const { pathname } = useLocation();
   const {
-    FeedPage: { currentTag },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+    FeedSlice: { currentTag },
+  } = useSelector((state) => state);
 
   return (
     <CardContent
@@ -30,7 +34,11 @@ const VideoTitle = ({
         minHeight: "100px",
       }}
     >
-      <Link to={`/YouTube-Clone/video/${channelTitle}?id=${id}#video`}>
+      <Link
+        to={handlingLinkTextSpace(
+          `/YouTube-Clone/video/${channelTitle}?id=${id}#video`
+        )}
+      >
         <Typography
           variant="body1"
           sx={{
@@ -45,7 +53,7 @@ const VideoTitle = ({
           {title}
         </Typography>
       </Link>
-      {pathname !== "/YouTube-Clone" && (
+      {pathname.includes("channel") && (
         <Typography
           variant="body2"
           sx={{
@@ -60,7 +68,11 @@ const VideoTitle = ({
       )}
       <Box sx={{ a: { color: "gray" } }}>
         {pathname === "/YouTube-Clone" && (
-          <Link to={`/YouTube-Clone/channel/${channelTitle}/${channelId}`}>
+          <Link
+            to={handlingLinkTextSpace(
+              `/YouTube-Clone/channel/${channelTitle}/${channelId}`
+            )}
+          >
             <Typography
               variant="body2"
               sx={{

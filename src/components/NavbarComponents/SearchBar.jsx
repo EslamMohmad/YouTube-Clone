@@ -1,16 +1,14 @@
-import { memo } from "react";
 import { useState } from "react";
 import { Paper, IconButton, Stack, Box } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { inputTxt } from "../../Store/SearchSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useFocus from "../../hooks/useFocus";
 
 const SearchBar = () => {
   const [focusState, setFocusState] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
   const { prevSearchText, searchText } = useSelector(
     ({ SearchSlice }) => SearchSlice
   );
@@ -21,6 +19,15 @@ const SearchBar = () => {
 
   const navTo = useNavigate();
 
+  const inputValueHandler = () => {
+    return (
+      inputValue &&
+      prevSearchText !== inputValue &&
+      (navTo(`YouTube-Clone/search/${inputValue}`),
+      action(inputTxt(inputValue)))
+    );
+  };
+
   return (
     <Stack
       sx={{
@@ -28,6 +35,8 @@ const SearchBar = () => {
         alignItems: "center",
         flexGrow: { xs: 1, sm: 0 },
       }}
+      onFocus={() => setFocusState(true)}
+      onBlur={() => setFocusState(false)}
     >
       <Box
         sx={{
@@ -49,6 +58,7 @@ const SearchBar = () => {
         <Paper
           component="input"
           ref={input}
+          value={inputValue ?? prevSearchText}
           sx={{
             border: "none",
             width: { xs: "100%", md: "450px" },
@@ -63,9 +73,8 @@ const SearchBar = () => {
           }}
           type="text"
           placeholder="Search"
-          onFocus={() => setFocusState(!focusState)}
-          onBlur={() => setFocusState(!focusState)}
           onInput={({ target }) => setInputValue(target.value)}
+          onKeyDown={(e) => e.key === "Enter" && inputValueHandler()}
         />
       </Box>
       <IconButton
@@ -82,12 +91,7 @@ const SearchBar = () => {
           ":hover": { backgroundColor: "background.lightBlackColor" },
           ":active": { backgroundColor: "action.active" },
         }}
-        onClick={() => {
-          if (inputValue) {
-            navTo(`YouTube-Clone/search/${inputValue}`);
-            action(inputTxt(inputValue));
-          }
-        }}
+        onClick={() => inputValueHandler()}
       >
         <Search />
       </IconButton>
@@ -95,4 +99,4 @@ const SearchBar = () => {
   );
 };
 
-export default memo(SearchBar);
+export default SearchBar;

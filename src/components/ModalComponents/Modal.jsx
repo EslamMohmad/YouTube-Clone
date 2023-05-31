@@ -47,9 +47,8 @@ const Modal = () => {
       videoMoreComments,
       screenScrollableState,
     },
-    GlobalSlice: {
-      VideoPage: { videoDetails, videoComments },
-    },
+
+    VideoSlice: { videoDetails, videoComments },
   } = useSelector((state) => state);
 
   const theme = useTheme();

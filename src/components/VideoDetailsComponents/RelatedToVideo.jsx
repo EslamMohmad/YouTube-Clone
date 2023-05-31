@@ -7,14 +7,12 @@ import VideoSuggested from "../ReuseableComponents/VideoSuggested";
 
 const RelatedToVideo = () => {
   const {
-    VideoPage: {
-      relatedVideos,
-      prevVideoId,
-      playListVideos,
-      prevPlaylistId,
-      playlistDetails,
-    },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+    relatedVideos,
+    prevVideoId,
+    playListVideos,
+    prevPlaylistId,
+    playlistDetails,
+  } = useSelector(({ VideoSlice }) => VideoSlice);
   const { search, hash } = useLocationDetails();
   const action = useDispatch();
 

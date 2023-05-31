@@ -45,9 +45,7 @@ const VideoSuggested = ({ video }) => {
             wordBreak: "break-word",
           }}
         >
-          <Link
-            to={`/YouTube-Clone/video/${channelTitle}/?id=${videoId}#video`}
-          >
+          <Link to={`/YouTube-Clone/video/${channelTitle}?id=${videoId}#video`}>
             {title}
           </Link>
         </Typography>

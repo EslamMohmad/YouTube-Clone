@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { Videos, Banner, ChannelTitle } from "../components";
 import { Stack, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChannelVideos, fetchChannelDetails } from "../Store/APIs";
 import { toggleCategoryMeun } from "../Store/ModalSlice";
@@ -10,9 +10,8 @@ import { setCurrentRoute } from "../Store/GlobalSlice";
 const ChannelDetails = () => {
   const { id, name } = useParams();
 
-  const {
-    ChannelPage: { channelVideos, prevChannelId, channelDetails },
-  } = useSelector(({ GlobalSlice }) => GlobalSlice);
+  const { channelVideos, prevChannelId, channelDetails, fetchingDataState } =
+    useSelector(({ ChannelSlice }) => ChannelSlice);
 
   const action = useDispatch();
 
@@ -39,7 +38,12 @@ const ChannelDetails = () => {
         <Box sx={{ py: 3 }}>
           <ChannelTitle />
         </Box>
-        <Videos filter={["video"]} location="channel" data={channelVideos} />
+        <Videos
+          filter={["video"]}
+          location="channel"
+          data={channelVideos}
+          fetchingState={fetchingDataState}
+        />
       </Box>
     </Stack>
   );

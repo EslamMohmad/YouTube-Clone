@@ -1,11 +1,15 @@
 import { useEffect, useRef } from "react";
 
-const useFocus = (state) => {
+const useFocus = () => {
+  //run this hook first time only
   const input = useRef();
-
+  const firstTime = useRef(true);
   useEffect(() => {
-    input.current.focus();
-  }, [state]);
+    if (firstTime.current) {
+      input.current.focus();
+      firstTime.current = false;
+    }
+  });
 
   return input;
 };

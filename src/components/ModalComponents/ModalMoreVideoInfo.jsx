@@ -60,7 +60,9 @@ const ModalMoreVideoInfo = ({ videoDetails: { snippet, statistics } }) => {
       <Box>
         {/* <Typography variant="caption">{snippet?.description}</Typography> */}
       </Box>
-      <VideoInfo details={snippet} statistics={statistics} />
+      <Box sx={{ pb: 2 }}>
+        <VideoInfo details={snippet} statistics={statistics} />
+      </Box>
     </Box>
   );
 };

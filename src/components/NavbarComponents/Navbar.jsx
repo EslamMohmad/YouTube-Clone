@@ -14,8 +14,9 @@ const Navbar = () => {
   const theme = useTheme();
   const mobileQuery = useMediaQuery(theme.breakpoints.down("sm"));
 
-  document.body.addEventListener("click", () =>
-    action(toggleSearchBarState(false))
+  document.body.addEventListener(
+    "click",
+    () => searchBarState && action(toggleSearchBarState(false))
   );
 
   useEffect(() => {
